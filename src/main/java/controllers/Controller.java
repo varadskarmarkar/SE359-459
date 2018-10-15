@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.window.AgileWindow;
+import controllers.window.BoardWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 public class Controller {
     private AgileWindow window;
+    BoardWindow bWindow;
     private Stage stage;
 
     public Controller(){
@@ -58,5 +60,16 @@ public class Controller {
     protected void incorrectAnswerAlert(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.NONE, "Sorry, your answer was incorrect.", ButtonType.CLOSE);
         alert.showAndWait();
+    }
+
+    public void showboard(ActionEvent event) {
+        bWindow = new BoardWindow();
+        bWindow.show(this.stage);
+        System.out.println("start game pressed");
+    }
+
+    public void closeboard(ActionEvent actionEvent) {
+        bWindow.hide();
+        System.out.println("Close Board pressed");
     }
 }
