@@ -16,7 +16,7 @@ public class Main extends Application {
 
         ((Controller) loader.getController()).setStage(primaryStage);
 
-        Scene scene = new Scene(root, 700, 500);
+        Scene scene = new Scene(root, 700, 750);
         primaryStage.setTitle("Agile Game: Scrum");
         primaryStage.setScene(scene);
         primaryStage.show();
