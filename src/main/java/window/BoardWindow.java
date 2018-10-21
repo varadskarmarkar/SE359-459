@@ -1,9 +1,6 @@
-package controllers.window;
+package window;
 
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.Scene;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
