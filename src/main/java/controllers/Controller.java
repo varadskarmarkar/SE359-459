@@ -1,7 +1,7 @@
 package controllers;
 
 import controllers.window.AgileWindow;
-import controllers.window.BoardWindow;
+import controllers.window.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 public class Controller {
     private AgileWindow window;
-    BoardWindow bWindow;
+    GameWindow gameWindow;
     private Stage stage;
 
     public Controller(){
@@ -62,14 +62,14 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void showboard(ActionEvent event) {
-        bWindow = new BoardWindow();
-        bWindow.show(this.stage);
+    public void startGame(ActionEvent event) {
+        gameWindow = new GameWindow();
+        try {
+            gameWindow.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("start game pressed");
     }
 
-    public void closeboard(ActionEvent actionEvent) {
-        bWindow.hide();
-        System.out.println("Close Board pressed");
-    }
 }

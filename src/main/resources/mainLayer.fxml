@@ -18,8 +18,7 @@
              <Button mnemonicParsing="false" onAction="#closePopup" text="Close popup" />
              <Button mnemonicParsing="false" onAction="#correctAnswerAlert" text="Correct" />
             <Button mnemonicParsing="false" onAction="#incorrectAnswerAlert" text="Incorrect" />
-             <Button mnemonicParsing="false" onAction="#showboard" text="Show Board" />
-             <Button mnemonicParsing="false" onAction="#closeboard" text="Close Board" />
+             <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
          </children>
       </VBox>
    </left>
