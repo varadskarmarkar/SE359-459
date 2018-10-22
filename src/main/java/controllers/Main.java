@@ -2,24 +2,34 @@ package controllers;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 
 public class Main extends Application {
 
+     BorderPane root;
+     Scene scene;
+     Stage stage;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
+        this.stage = primaryStage;
+
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("mainLayer.fxml"));
-        Parent root = (Parent) loader.load();
+        root = loader.load();
+        Controller mainController =  loader.getController();
+        mainController.setStage(this.stage);
 
-        ((Controller) loader.getController()).setStage(primaryStage);
 
-        Scene scene = new Scene(root, 700, 750);
-        primaryStage.setTitle("Agile Game: Scrum");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+
+        scene = new Scene(root, 700, 750);
+        this.stage.setTitle("Agile Game: Scrum");
+        this.stage.setScene(scene);
+        this.stage.show();
+
+
     }
 
     public static void main(String[] args) {
