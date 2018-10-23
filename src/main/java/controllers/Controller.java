@@ -1,6 +1,6 @@
 package controllers;
 
-import controllers.window.AgileWindow;
+import window.AgileWindow;
 import controllers.window.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
