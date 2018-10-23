@@ -1,39 +1,52 @@
 package controllers;
 
-import javafx.scene.Cursor;
-import javafx.scene.control.Label;
-import javafx.scene.paint.Color;
-import window.AgileWindow;
-import window.BoardWindow;
+import controllers.window.AgileWindow;
+import controllers.window.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import window.CongratulationWindow;
 
 
 public class Controller {
-
-    private AgileWindow congratulationWindow;
-    private BoardWindow bWindow;
-
-    /**
-     *  Made "Stage" be a field here so that we can access it better within the controller once
-     * the controller knows about it after using its setter method.
-     */
+    private AgileWindow window;
+    GameWindow gameWindow;
     private Stage stage;
 
-    public Controller() { }
+    public Controller(){
+        window = new AgileWindow();
+
+        // Set the message area properties
+        Label welcome_message = new Label();
+        welcome_message.setFont(Font.font("Times New Roman"));
+        welcome_message.setCursor(Cursor.HAND);
+        welcome_message.setTextFill(Color.BLUEVIOLET);
+        welcome_message.setText("Welcome to our Agile game! \n We hope you enjoy it!");
+
+        // Set the pop-up window properties
+        window.setText(welcome_message);
+        window.setWindowWidth(260);
+        window.setWindowHeight(200);
+    }
 
     public void setStage (Stage stage) {
         this.stage = stage;
     }
 
+    @FXML
+    protected void openPopup(ActionEvent event) {
+        window.show(this.stage);
+        System.out.println("openPopup pressed");
+    }
 
     @FXML
-    protected void closeCongratulationWindow(ActionEvent event) {
-        congratulationWindow.hide();
+    protected void closePopup(ActionEvent event) {
+        window.hide();
         System.out.println("closePopup pressed");
     }
 
@@ -49,35 +62,14 @@ public class Controller {
         alert.showAndWait();
     }
 
-    @FXML public void showBoard(ActionEvent event) {
-        bWindow = new BoardWindow();
-        bWindow.show(this.stage);
+    public void startGame(ActionEvent event) {
+        gameWindow = new GameWindow();
+        try {
+            gameWindow.start(stage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("start game pressed");
     }
 
-    @FXML public void closeBoard(ActionEvent actionEvent) {
-        bWindow.hide();
-        System.out.println("Close Board pressed");
-    }
-
-    /***
-     * Creates a Congratulation Window when button is pressed.
-     */
-    @FXML public void showCongratulationWindow() {
-        congratulationWindow = new CongratulationWindow();
-
-        Label congratulation_label = new Label("You won the game!\nA big thanks for playing!\nTeam 5",
-                ((CongratulationWindow) congratulationWindow).setUpImage());
-
-        congratulation_label.setCursor(Cursor.HAND);
-        congratulation_label.setTextFill(Color.BLUEVIOLET);
-
-        congratulationWindow.setWindowWidth(400);
-        congratulationWindow.setWindowHeight(300);
-
-
-        congratulationWindow.setText(congratulation_label);
-        congratulationWindow.show(stage);
-
-    }
 }
