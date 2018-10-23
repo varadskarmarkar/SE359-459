@@ -8,19 +8,17 @@
 <!--The root is a BorderPane -->
 
 <BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
-   <bottom>
-      <Label text="SE 359/459 Group 5" BorderPane.alignment="CENTER" />
-   </bottom>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
-         <children>
-             <Button mnemonicParsing="false" onAction="#openPopup" text="Open popup" />
-             <Button mnemonicParsing="false" onAction="#closePopup" text="Close popup" />
-             <Button mnemonicParsing="false" onAction="#correctAnswerAlert" text="Correct" />
-            <Button mnemonicParsing="false" onAction="#incorrectAnswerAlert" text="Incorrect" />
-             <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
-         </children>
-      </VBox>
-   </left>
-
+    <bottom>
+        <Label text="SE 359/459 Group 5" BorderPane.alignment="CENTER" />
+    </bottom>
+    <left>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#showCongratulationWindow" text="CongratWindow"/>
+                <Button mnemonicParsing="false" onAction="#correctAnswerAlert" text="Correct" />
+                <Button mnemonicParsing="false" onAction="#incorrectAnswerAlert" text="Incorrect" />
+                <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
+            </children>
+        </VBox>
+    </left>
 </BorderPane>

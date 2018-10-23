@@ -5,6 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Popup;
+import javafx.stage.Window;
 
 public class AgileWindow extends Popup {
 
@@ -58,7 +59,7 @@ public class AgileWindow extends Popup {
                 "    -fx-text-fill: white;");
 
         closeButton.setOnAction((closingButtonEvent ->  {
-            super.hide();
+            this.hideWindow();
         }));
 
         this.messageContainer = new StackPane();
@@ -72,6 +73,20 @@ public class AgileWindow extends Popup {
                         "-fx-stroke-dash-offset: 6; " +
                         " -fx-stroke-line-cap: round");
         super.getContent().addAll(messageContainer, messageArea, closeButton);
+    }
+
+    /**
+     * From Popup class
+     */
+    public void hideWindow() {
+        super.hide();
+    }
+
+    /**
+     * From Popup class
+     */
+    public void showWindow(Window owner) {
+        super.show(owner);
     }
 
     @Override
