@@ -1,6 +1,7 @@
 package controllers;
 
 import controllers.window.AgileWindow;
+import controllers.window.CongratulationWindow;
 import controllers.window.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,45 +10,25 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 public class Controller {
-    private AgileWindow window;
+    /*
+        This is supposed to be the Congrats window.
+        It can be closed using the button that is attached to it.
+     */
+    private AgileWindow congratulationWindow;
+
     GameWindow gameWindow;
+
     private Stage stage;
 
-    public Controller(){
-        window = new AgileWindow();
+    public Controller(){ }
 
-        // Set the message area properties
-        Label welcome_message = new Label();
-        welcome_message.setFont(Font.font("Times New Roman"));
-        welcome_message.setCursor(Cursor.HAND);
-        welcome_message.setTextFill(Color.BLUEVIOLET);
-        welcome_message.setText("Welcome to our Agile game! \n We hope you enjoy it!");
-
-        // Set the pop-up window properties
-        window.setText(welcome_message);
-        window.setWindowWidth(260);
-        window.setWindowHeight(200);
-    }
 
     public void setStage (Stage stage) {
         this.stage = stage;
-    }
-
-    @FXML
-    protected void openPopup(ActionEvent event) {
-        window.show(this.stage);
-        System.out.println("openPopup pressed");
-    }
-
-    @FXML
-    protected void closePopup(ActionEvent event) {
-        window.hide();
-        System.out.println("closePopup pressed");
     }
 
     @FXML
@@ -70,6 +51,25 @@ public class Controller {
             e.printStackTrace();
         }
         System.out.println("start game pressed");
+    }
+
+    /***
+     * Creates a Congratulation Window when button is pressed.
+     */
+    @FXML public void showCongratulationWindow() {
+        congratulationWindow = new CongratulationWindow();
+        Label congratulation_label = new Label("You won the game!\nA big thanks for playing!\nTeam 5",
+                ((CongratulationWindow) congratulationWindow).setUpImage());
+        congratulation_label.setCursor(Cursor.HAND);
+        congratulation_label.setTextFill(Color.BLUEVIOLET);
+        congratulationWindow.setWindowWidth(400);
+        congratulationWindow.setWindowHeight(300);
+        congratulationWindow.setText(congratulation_label);
+        congratulationWindow.show(stage);
+    }
+
+    @FXML public void closeCongratulationWindow() {
+        congratulationWindow.hide();
     }
 
 }

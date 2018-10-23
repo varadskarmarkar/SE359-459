@@ -3,6 +3,7 @@ package controllers.window;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Window;
 
 public class CongratulationWindow extends AgileWindow {
 
@@ -42,6 +43,16 @@ public class CongratulationWindow extends AgileWindow {
                     " " + exception.getCause());
         }
         return imageView;
+    }
+
+
+    public void showCongratWindow(Window owner) {
+        super.showWindow(owner);
+    }
+
+
+    public void hideCongratWindow() {
+        super.hideWindow();
     }
 
     @Override
