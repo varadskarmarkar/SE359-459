@@ -1,4 +1,4 @@
-package window;
+package controllers.window;
 
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
