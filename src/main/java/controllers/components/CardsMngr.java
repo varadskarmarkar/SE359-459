@@ -33,8 +33,8 @@ public class CardsMngr {
     public List<Card> getBoardCards() {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
-
-                Card card = new Card(((x * 10) + y), new Point2D(x * scallingFactorX, y * scallingFactorY), this.scallingFactorX, this.scallingFactorY, N.X, "idk");
+                Card card = new Card(((x * 10) + y), new Point2D(x * scallingFactorX, y * scallingFactorY), this.scallingFactorX, this.scallingFactorY, N.X,
+                        "idk");
                 boardCards.add(card);
             }
         }

@@ -5,7 +5,7 @@ import java.util.List;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.*;
 
-public class Player extends Pane{
+public class Player extends Pane {
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
     Point2D lastPosition;

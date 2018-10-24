@@ -22,6 +22,7 @@ public class GameWindow extends Application {
     Point2D lastPosition;
     boolean inDragMode = false;
     Card currentComponent;
+
     List<Card> boardCards;
     List<Card> currentPlayerCard;
 
@@ -32,13 +33,21 @@ public class GameWindow extends Application {
 
         scene = new Scene(root, 600, 800, Color.LIGHTGREEN);
         primaryStage.setTitle("Game");
+
+        // Event filters.
+
         root.setOnMouseDragged(mouseHandler);
         root.setOnMouseReleased(mouseHandler);
         root.setOnMousePressed(mouseHandler);
+
+
+
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
         CardsMngr cards = new CardsMngr();
+
         boardCards = cards.getBoardCards();
 
         //First Player
@@ -50,6 +59,10 @@ public class GameWindow extends Application {
         root.getChildren().addAll(currentPlayerCard);
 
     }
+
+
+
+
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
         @Override
@@ -115,8 +128,8 @@ public class GameWindow extends Application {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
 
