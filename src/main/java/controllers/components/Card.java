@@ -6,7 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.io.*;
 import java.util.*;
 
 
@@ -19,13 +18,14 @@ public class Card extends StackPane {
     private Double width;
     private Double hight;
     private Rectangle rec;
+
     private HashMap <Integer, String> questionPool;
 
 
     public Card() {
         this.id = 0;
         this.name = N.X;
-        this.ques = "whattt";
+//        this.ques = "whattt";
 
         this.position = new Point2D(80,70);
         this.setLayoutX(this.position.getX());
@@ -36,14 +36,13 @@ public class Card extends StackPane {
         this.rec.setFill(Color.GRAY);
 
 
-        Text text = new Text(this.id + "\n" + this.name + "\n" + ques);
+        Text text = new Text(this.id + "\n" + this.name + "\n");
         getChildren().addAll(rec, text);
     }
 
-        public Card(final int id, Point2D pos, double w, double h, Enum name, String q) {
+        public Card(final int id, Point2D pos, double w, double h, Enum name) {
         this.id = id;
         this.name = name;
-        this.ques = q;
         this.width = w;
         this.hight = h;
 
@@ -55,7 +54,7 @@ public class Card extends StackPane {
         this.rec.setStroke(Color.BLACK);
         this.rec.setFill(Color.GRAY);
 
-        Text text = new Text(id + "\n" + this.name + "\n" + this.ques);
+        Text text = new Text(id + "\n" + this.name + "\n");
         getChildren().addAll(this.rec, text);
 
     }
@@ -97,52 +96,4 @@ public class Card extends StackPane {
         rec.setFill(Color.RED);
     }
 
-
-
-    public String getRandomQuestion() {
-        Random randomizes = new Random();
-        int bound = randomizes.nextInt(questionPool.keySet().size());
-        String question = questionPool.get(bound);
-        // Avoids an empty line in the file.
-        return question == null ? question = questionPool.get(1) : question;
-    }
-
-    /**
-     * Retrieves the questions from the file full of questions.
-     * @return
-     */
-    private List<String> retrieveQuestionsFromFile() {
-        List <String> questionsFromFile = new ArrayList<>();
-        try {
-
-            ClassLoader loader = getClass().getClassLoader();
-            File questionsFile = new File(loader.getResource("files/questions.txt").getFile());
-            Scanner scanner = new Scanner(questionsFile);
-
-            while (scanner.hasNextLine()){
-                String question = scanner.nextLine();
-                questionsFromFile.add(question);
-            }
-            scanner.close();
-
-        } catch (IOException exception) {
-            System.out.println("Exception:"
-                    + exception.getMessage()
-                    + " " + exception.getCause());
-        }
-        return questionsFromFile;
-    }
-
-    /**
-     * Fills the HashMap
-     */
-    private void fillQuestionPool() {
-        questionPool = new HashMap<>();
-        List<String> questions = retrieveQuestionsFromFile();
-
-        int max_in_keySet = questions.size();
-        for (String question: questions) {
-            questionPool.put(max_in_keySet--, question);
-        }
-    }
 }

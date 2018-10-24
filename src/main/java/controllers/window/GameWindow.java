@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -25,6 +26,10 @@ public class GameWindow extends Application {
 
     List<Card> boardCards;
     List<Card> currentPlayerCard;
+
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -62,8 +67,6 @@ public class GameWindow extends Application {
 
 
 
-
-
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent mouseEvent) {
@@ -88,8 +91,10 @@ public class GameWindow extends Application {
                     if (currentComponent != null) {
                         if (droppedAt == null) {
                             System.out.println("cannot find card");
-                        } else {
+                        }
+                        else {
                             if (currentComponent.getID() == droppedAt.getID()) {
+                                createQuestionDialog();
                                 droppedAt.placeChip();
                             }
                             System.out.println(droppedAt.getID());
@@ -117,6 +122,16 @@ public class GameWindow extends Application {
         }
 
     };
+
+    /**
+     * Julio
+     */
+    private void createQuestionDialog() {
+        QuestionGenerator questionGenerator = new QuestionGenerator();
+        ChoiceDialog choiceDialog = new ChoiceDialog("Select all that apply");
+        choiceDialog.setHeaderText(questionGenerator.getRandomQuestion());
+        choiceDialog.show();
+    }
 
     public Card getCurrentShape(List<Card> components, Point2D clickLocation) {
         for (Card component : components)
