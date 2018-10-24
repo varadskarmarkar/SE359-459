@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -22,8 +23,13 @@ public class GameWindow extends Application {
     Point2D lastPosition;
     boolean inDragMode = false;
     Card currentComponent;
+
     List<Card> boardCards;
     List<Card> currentPlayerCard;
+
+
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -32,13 +38,21 @@ public class GameWindow extends Application {
 
         scene = new Scene(root, 600, 800, Color.LIGHTGREEN);
         primaryStage.setTitle("Game");
+
+        // Event filters.
+
         root.setOnMouseDragged(mouseHandler);
         root.setOnMouseReleased(mouseHandler);
         root.setOnMousePressed(mouseHandler);
+
+
+
+
         primaryStage.setScene(scene);
         primaryStage.show();
 
         CardsMngr cards = new CardsMngr();
+
         boardCards = cards.getBoardCards();
 
         //First Player
@@ -50,6 +64,8 @@ public class GameWindow extends Application {
         root.getChildren().addAll(currentPlayerCard);
 
     }
+
+
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
         @Override
@@ -75,8 +91,10 @@ public class GameWindow extends Application {
                     if (currentComponent != null) {
                         if (droppedAt == null) {
                             System.out.println("cannot find card");
-                        } else {
+                        }
+                        else {
                             if (currentComponent.getID() == droppedAt.getID()) {
+                                createQuestionDialog();
                                 droppedAt.placeChip();
                             }
                             System.out.println(droppedAt.getID());
@@ -105,6 +123,16 @@ public class GameWindow extends Application {
 
     };
 
+    /**
+     * Julio
+     */
+    private void createQuestionDialog() {
+        QuestionGenerator questionGenerator = new QuestionGenerator();
+        ChoiceDialog choiceDialog = new ChoiceDialog("Select all that apply");
+        choiceDialog.setHeaderText(questionGenerator.getRandomQuestion());
+        choiceDialog.show();
+    }
+
     public Card getCurrentShape(List<Card> components, Point2D clickLocation) {
         for (Card component : components)
             if (component.contains(clickLocation)) {
@@ -115,8 +143,8 @@ public class GameWindow extends Application {
         return null;
     }
 
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
 

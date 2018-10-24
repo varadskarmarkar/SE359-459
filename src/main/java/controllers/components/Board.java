@@ -1,10 +1,13 @@
 package controllers.components;
 
+
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Board {
     Map<Integer, Enum> cardList;
+
     public Board() {
         cardList = new HashMap<Integer, Enum>();
         //first row
@@ -118,6 +121,5 @@ public class Board {
         cardList.put(98, N.D6);
         cardList.put(99, N.X);
     }
-
 }
 

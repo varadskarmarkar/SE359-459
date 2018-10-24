@@ -1,0 +1,7 @@
+Which of the following are examples of the kinds of things that can wrong during a typical software development effort?
+Which of the following best describes the "Cone of Uncertainty?"
+Is the Waterfall model is dead?
+Which of the following are examples of Agile frameworks.
+Agile approaches like Scrum, XP, and Kanban are methodologies and should be followed exactly as designed if you want to realize any of their benefits.
+According to the Agile Manifesto, we should never spend time on activities like detailed UML diagrams or project planning.
+Which of the following IS NOT an agile principle?

@@ -14,10 +14,7 @@ import javafx.stage.Stage;
 
 
 public class Controller {
-    /*
-        This is supposed to be the Congrats window.
-        It can be closed using the button that is attached to it.
-     */
+
     private AgileWindow congratulationWindow;
 
     GameWindow gameWindow;
