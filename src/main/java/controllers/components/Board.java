@@ -121,5 +121,9 @@ public class Board {
         cardList.put(98, N.D6);
         cardList.put(99, N.X);
     }
+
+    public Enum<N> getName(int id){
+        return this.cardList.get(id);
+    }
 }
 
