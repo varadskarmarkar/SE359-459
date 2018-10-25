@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 public class Board {
-    Map<Integer, Enum> cardList;
+    Map <Integer, Enum> cardList;
 
     public Board() {
         cardList = new HashMap<Integer, Enum>();
@@ -120,6 +120,10 @@ public class Board {
         cardList.put(97, N.D7);
         cardList.put(98, N.D6);
         cardList.put(99, N.X);
+    }
+
+    public  Map <Integer, Enum> getCardList() {
+        return cardList;
     }
 }
 

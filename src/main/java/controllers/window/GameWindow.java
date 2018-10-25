@@ -28,9 +28,6 @@ public class GameWindow extends Application {
     List<Card> currentPlayerCard;
 
 
-
-
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         // TODO Auto-generated method stub
@@ -47,10 +44,6 @@ public class GameWindow extends Application {
 
 
 
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
         CardsMngr cards = new CardsMngr();
 
         boardCards = cards.getBoardCards();
@@ -63,8 +56,10 @@ public class GameWindow extends Application {
         root.getChildren().addAll(boardCards);
         root.getChildren().addAll(currentPlayerCard);
 
-    }
+        primaryStage.setScene(scene);
+        primaryStage.show();
 
+    }
 
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
@@ -128,7 +123,7 @@ public class GameWindow extends Application {
      */
     private void createQuestionDialog() {
         QuestionGenerator questionGenerator = new QuestionGenerator();
-        ChoiceDialog choiceDialog = new ChoiceDialog("Select all that apply");
+        ChoiceDialog choiceDialog = new ChoiceDialog<>("Select all that apply");
         choiceDialog.setHeaderText(questionGenerator.getRandomQuestion());
         choiceDialog.show();
     }

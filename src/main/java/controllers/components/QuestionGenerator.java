@@ -13,6 +13,10 @@ public class QuestionGenerator {
         this.fillQuestionPool();
     }
 
+    /*
+        Make the keySet() from questionPool to be the key for answerPool.
+        answerPool should have a value a list of strings.
+     */
 
     private List<String> retrieveQuestionsFromFile() {
         List <String> questionsFromFile = new ArrayList<>();

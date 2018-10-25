@@ -6,9 +6,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
-import java.util.*;
-
-
 public class Card extends StackPane {
 
     private final int id;
@@ -18,9 +15,6 @@ public class Card extends StackPane {
     private Double width;
     private Double hight;
     private Rectangle rec;
-
-    private HashMap <Integer, String> questionPool;
-
 
     public Card() {
         this.id = 0;
@@ -40,7 +34,7 @@ public class Card extends StackPane {
         getChildren().addAll(rec, text);
     }
 
-        public Card(final int id, Point2D pos, double w, double h, Enum name) {
+    public Card(final int id, Point2D pos, double w, double h, Enum name) {
         this.id = id;
         this.name = name;
         this.width = w;
@@ -69,8 +63,6 @@ public class Card extends StackPane {
         rec.setX(x);
         rec.setY(y);
     }
-
-
 
     // setter and getters will be added later
     public Enum getName() {
