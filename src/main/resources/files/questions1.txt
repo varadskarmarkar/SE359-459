@@ -1,0 +1,16 @@
+
+q: question one?
+a: true
+opt: true
+opt: false
+
+q: question two?
+a: false
+opt: true
+opt: false
+
+q: question three?
+a: yes
+opt: yes
+opt: no
+opt: maybe

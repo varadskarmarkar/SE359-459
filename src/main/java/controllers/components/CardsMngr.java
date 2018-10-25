@@ -7,14 +7,14 @@ public class CardsMngr {
 
     List<Card> cards;
     List<Card> boardCards;
-
+    Board board;
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
 
     public CardsMngr() {
 
         cards = new ArrayList<Card>();
-
+        board = new Board();
         // initialize card for the board.
         boardCards = new ArrayList<Card>();
 
@@ -23,7 +23,7 @@ public class CardsMngr {
     public List<Card> getRandSet() {
         for (int i = 0; i < 6; i++) {
             Card card = new Card(i, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
-                    this.scallingFactorY, N.X);
+                    this.scallingFactorY, board.getName(i));
             cards.add(card);
 
         }
@@ -36,7 +36,7 @@ public class CardsMngr {
                 Card card = new Card((x * 10) + y,
                         new Point2D(x * scallingFactorX, y * scallingFactorY),
                         this.scallingFactorX,
-                        this.scallingFactorY, N.X);
+                        this.scallingFactorY, board.getName((x * 10) + y));
                 boardCards.add(card);
             }
         }
