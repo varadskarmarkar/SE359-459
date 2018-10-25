@@ -126,7 +126,7 @@ public class Board {
         return cardList;
     }
 
-        public Enum<N> getName(int id){
+    public Enum<N> getName(int id){
         return this.cardList.get(id);
     }
 }

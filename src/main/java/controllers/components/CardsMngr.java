@@ -42,7 +42,6 @@ public class CardsMngr {
               rand_IDs_from_board, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX, this.scallingFactorY,
                     generateLayoutForCard()
             );
-            cards.add(card);
 
         }
         return cards;

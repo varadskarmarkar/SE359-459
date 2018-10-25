@@ -29,7 +29,6 @@ public class GameWindow extends Application {
 
     QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
 
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         // TODO Auto-generated method stub
