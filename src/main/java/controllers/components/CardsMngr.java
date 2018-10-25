@@ -7,7 +7,7 @@ public class CardsMngr {
 
     List<Card> cards;
     List<Card> boardCards;
-
+    Board board;
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
 
@@ -20,7 +20,7 @@ public class CardsMngr {
     public CardsMngr() {
 
         cards = new ArrayList<Card>();
-
+        board = new Board();
         // initialize card for the board.
         boardCards = new ArrayList<Card>();
 
@@ -29,6 +29,7 @@ public class CardsMngr {
 
     public List<Card> getRandSet() {
         for (int i = 0; i < 6; i++) {
+<<<<<<< HEAD
 //            Card card = new Card(i, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
 //                    this.scallingFactorY, N.X);
 //            cards.add(card);
@@ -42,6 +43,10 @@ public class CardsMngr {
               rand_IDs_from_board, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX, this.scallingFactorY,
                     generateLayoutForCard()
             );
+=======
+            Card card = new Card(i, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
+                    this.scallingFactorY, board.getName(i));
+>>>>>>> b2c921cc25f4f73d0ca5b55531df1a5b4b08fcf4
             cards.add(card);
 
         }
@@ -62,8 +67,15 @@ public class CardsMngr {
     public List<Card> getBoardCards() {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
+<<<<<<< HEAD
                 Card card = new Card((x * 10) + y, new Point2D(x * scallingFactorX,
                         y * scallingFactorY), this.scallingFactorX, this.scallingFactorY, generateLayoutForCard());
+=======
+                Card card = new Card((x * 10) + y,
+                        new Point2D(x * scallingFactorX, y * scallingFactorY),
+                        this.scallingFactorX,
+                        this.scallingFactorY, board.getName((x * 10) + y));
+>>>>>>> b2c921cc25f4f73d0ca5b55531df1a5b4b08fcf4
                 boardCards.add(card);
             }
         }

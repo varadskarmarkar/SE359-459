@@ -27,6 +27,8 @@ public class GameWindow extends Application {
     List<Card> boardCards;
     List<Card> currentPlayerCard;
 
+    QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -88,8 +90,13 @@ public class GameWindow extends Application {
                             System.out.println("cannot find card");
                         }
                         else {
-                            if (currentComponent.getID() == droppedAt.getID()) {
-                                createQuestionDialog();
+                            if (currentComponent.getName() == droppedAt.getName()) {
+                                    // question will be passed to createQuestionDialog();
+                                
+//                                createQuestionDialog();
+//                                String qq = questionsMngr.getNextQuestion().getQuestion();
+
+                                System.out.println(questionsMngr.getNextQuestion().getQuestion());
                                 droppedAt.placeChip();
                             }
                             System.out.println(droppedAt.getID());

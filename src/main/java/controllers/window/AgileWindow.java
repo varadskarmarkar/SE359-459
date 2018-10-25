@@ -1,5 +1,7 @@
 package controllers.window;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -58,8 +60,11 @@ public class AgileWindow extends Popup {
                 "    -fx-background-insets: 0;\n" +
                 "    -fx-text-fill: white;");
 
-        closeButton.setOnAction((closingButtonEvent ->  {
-            this.hideWindow();
+        closeButton.setOnAction((new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent closingButtonEvent) {
+                AgileWindow.this.hideWindow();
+            }
         }));
 
         this.messageContainer = new StackPane();
