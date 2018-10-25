@@ -122,13 +122,12 @@ public class Board {
         cardList.put(99, N.X);
     }
 
-<<<<<<< HEAD
     public  Map <Integer, Enum> getCardList() {
         return cardList;
-=======
-    public Enum<N> getName(int id){
+    }
+
+        public Enum<N> getName(int id){
         return this.cardList.get(id);
->>>>>>> b2c921cc25f4f73d0ca5b55531df1a5b4b08fcf4
     }
 }
 
