@@ -7,16 +7,17 @@
 
 <!--The root is a BorderPane -->
 
-<BorderPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
+<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Controller">
     <bottom>
         <Label text="SE 359/459 Group 5" BorderPane.alignment="CENTER" />
     </bottom>
     <left>
         <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#showCongratulationWindow" text="CongratWindow"/>
+                <Button mnemonicParsing="false" onAction="#showCongratulationWindow" text="CongratWindow" />
                 <Button mnemonicParsing="false" onAction="#correctAnswerAlert" text="Correct" />
                 <Button mnemonicParsing="false" onAction="#incorrectAnswerAlert" text="Incorrect" />
+            <Button fx:id="welcomeMessage" mnemonicParsing="false" onMouseClicked="#setWelcomeMessage" text="Welcome Message" />
                 <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
             </children>
         </VBox>
