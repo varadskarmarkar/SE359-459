@@ -1,8 +1,5 @@
 package controllers.window;
 
-import java.awt.*;
-import java.util.List;
-
 import controllers.components.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -10,9 +7,10 @@ import javafx.geometry.Point2D;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
+import java.util.List;
 
 public class GameWindow extends Application {
     final private int scallingFactorY = 65;
@@ -29,49 +27,6 @@ public class GameWindow extends Application {
     List<Card> currentPlayerCard;
 
     QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
-
-
-
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        // TODO Auto-generated method stub
-        root = new Pane();
-
-        scene = new Scene(root, 600, 800);
-        primaryStage.setTitle("Game");
-
-        // Event filters.
-
-        root.setOnMouseDragged(mouseHandler);
-        root.setOnMouseReleased(mouseHandler);
-        root.setOnMousePressed(mouseHandler);
-
-
-
-
-
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        CardsMngr cards = new CardsMngr();
-
-        boardCards = cards.getBoardCards();
-
-        //First Player
-        Player player = new Player();
-        player.setCardsOnHand(cards.getRandSet());
-        this.currentPlayerCard = player.getCardsOnHand();
-
-        root.getChildren().addAll(boardCards);
-        root.getChildren().addAll(currentPlayerCard);
-
-    }
-
-
-
     EventHandler<MouseEvent> mouseHandler;
 
     {
@@ -106,8 +61,8 @@ public class GameWindow extends Application {
 
                                     Question q = questionsMngr.getNextQuestion();
 
-                                  ChoiceDialog choiceDialog;
-                                    try{
+                                    ChoiceDialog choiceDialog;
+                                    try {
                                         choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
                                         choiceDialog.setHeaderText(q.getQuestion());
 
@@ -121,7 +76,7 @@ public class GameWindow extends Application {
                                             System.out.println("you missed it");
                                         }
 
-                                    } catch (NullPointerException ne){
+                                    } catch (NullPointerException ne) {
                                         System.out.println("Dialog close");
                                     }
 
@@ -154,16 +109,52 @@ public class GameWindow extends Application {
         };
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        // TODO Auto-generated method stub
+        root = new Pane();
+
+        scene = new Scene(root, 600, 800);
+        primaryStage.setTitle("Game");
+
+        // Event filters.
+
+        root.setOnMouseDragged(mouseHandler);
+        root.setOnMouseReleased(mouseHandler);
+        root.setOnMousePressed(mouseHandler);
+
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        CardsMngr cards = new CardsMngr();
+
+        boardCards = cards.getBoardCards();
+
+        //First Player
+        Player player = new Player();
+        player.setCardsOnHand(cards.getRandSet());
+        this.currentPlayerCard = player.getCardsOnHand();
+
+        root.getChildren().addAll(boardCards);
+        root.getChildren().addAll(currentPlayerCard);
+
+    }
+
     /**
      * Julio
-
-    private void createQuestionDialog(Question q) {
-//        QuestionGenerator questionGenerator = new QuestionGenerator();
-        ChoiceDialog choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
-        choiceDialog.setHeaderText(q.getQuestion());
-        choiceDialog.show();
-    }
-     Abdul : move some of the code into the mouse handler
+     * <p>
+     * private void createQuestionDialog(Question q) {
+     * //        QuestionGenerator questionGenerator = new QuestionGenerator();
+     * ChoiceDialog choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
+     * choiceDialog.setHeaderText(q.getQuestion());
+     * choiceDialog.show();
+     * }
+     * Abdul : move some of the code into the mouse handler
      */
 
     public Card getCurrentShape(List<Card> components, Point2D clickLocation) {
@@ -174,10 +165,6 @@ public class GameWindow extends Application {
             }
 
         return null;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
 
