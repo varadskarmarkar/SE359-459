@@ -75,7 +75,7 @@ public class Controller {
          */
         List<Integer> players = new ArrayList<>();
         for(int i = 2; i <= 6;i++){
-            players.add(i);
+            if(i % 2 == 0) players.add(i);
         }
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(2,players);
         dialog.setTitle("Player Count");
@@ -83,7 +83,7 @@ public class Controller {
         dialog.setContentText("Number of players:");
         Optional<Integer> numOfPlayers = dialog.showAndWait();
         if(numOfPlayers.isPresent()){
-            System.out.println("number of players selected is: " + "  " + numOfPlayers.get());
+            System.out.println("Number of players selected is: " + "  " + numOfPlayers.get());
             return numOfPlayers.get();
         }
         else{
