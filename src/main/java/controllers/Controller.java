@@ -6,11 +6,13 @@ import controllers.window.GameWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 public class Controller {
@@ -18,6 +20,8 @@ public class Controller {
     private AgileWindow congratulationWindow;
 
     GameWindow gameWindow;
+    @FXML
+    Button welcomeMessage;
 
     private Stage stage;
 
@@ -65,6 +69,22 @@ public class Controller {
         congratulationWindow.show(stage);
     }
 
+    @FXML public void setWelcomeMessage(){
+        /***
+         *  Dialog box that prompts player to select number of players, returns their selection.
+         */
+        List<Integer> players = new ArrayList<>();
+        for(int i = 2; i <= 6;i++){
+            players.add(i);
+        }
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(2,players);
+        dialog.setTitle("Player Count");
+        dialog.setHeaderText("Set the number of people playing");
+        dialog.setContentText("Number of players:");
+        Optional<Integer> numOfPlayers = dialog.showAndWait();
+        System.out.println("number of players selected is: " + "  " + numOfPlayers.get());
+
+    }
     @FXML public void closeCongratulationWindow() {
         congratulationWindow.hide();
     }
