@@ -69,7 +69,7 @@ public class Controller {
         congratulationWindow.show(stage);
     }
 
-    @FXML public void setWelcomeMessage(){
+    @FXML public int setWelcomeMessage(){
         /***
          *  Dialog box that prompts player to select number of players, returns their selection.
          */
@@ -82,7 +82,15 @@ public class Controller {
         dialog.setHeaderText("Set the number of people playing");
         dialog.setContentText("Number of players:");
         Optional<Integer> numOfPlayers = dialog.showAndWait();
-        System.out.println("number of players selected is: " + "  " + numOfPlayers.get());
+        if(numOfPlayers.isPresent()){
+            System.out.println("number of players selected is: " + "  " + numOfPlayers.get());
+            return numOfPlayers.get();
+        }
+        else{
+            System.out.println("User did not select anything, default player count of 2 will be used.");
+            return 2;
+        }
+
 
     }
     @FXML public void closeCongratulationWindow() {
