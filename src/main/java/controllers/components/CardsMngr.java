@@ -21,11 +21,14 @@ public class CardsMngr {
     }
 
     public List<Card> getRandSet() {
+        cards = new ArrayList<Card>();
+        Random r = new Random();
+        int x = r.nextInt(50);
         for (int i = 0; i < 6; i++) {
-            Card card = new Card(i, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
-                    this.scallingFactorY, board.getName(i));
+            Card card = new Card(x, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
+                    this.scallingFactorY, board.getName(x));
             cards.add(card);
-
+            x=r.nextInt(50);
         }
         return cards;
     }
@@ -42,4 +45,5 @@ public class CardsMngr {
         }
         return boardCards;
     }
+
 }

@@ -5,41 +5,44 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GameWindow extends Application {
+
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
     final private int boardSize = 10;
-
     Pane root;
     Scene scene;
-    Point2D lastPosition;
+    int numOfPlayer;
+    int currentPlayerId = 0;
+    Point2D lastPosition; // for dragging and calculating the delta
     boolean inDragMode = false;
-    Card currentComponent;
-
-    List<Card> boardCards;
-    List<Card> currentPlayerCard;
-
+    Card pickedCard; // the one being picked from player's hand, and dragged
+//    List<Card> currentHand;
+    List<Player> players = new ArrayList<Player>();
     QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
-    EventHandler<MouseEvent> mouseHandler;
+    CardsMngr cardsMngr = new CardsMngr();
 
-    {
-        mouseHandler = new EventHandler<MouseEvent>() {
+    List<Card> boardCards = cardsMngr.getBoardCards();
+    Button b;
+    EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                 Point2D clickPoint = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 
                 String eventName = mouseEvent.getEventType().getName();
                 if (!inDragMode)
-                    if (currentComponent == null) {
+                    if (pickedCard == null) {
                         try {
-                            currentComponent = getCurrentShape(currentPlayerCard, clickPoint);
+                            pickedCard = getCurrentShape(players.get(currentPlayerId).getCardsOnHand(), clickPoint);
                         } catch (NullPointerException ex) {
                             System.out.println("trying to pick no card!");
                         }
@@ -52,11 +55,11 @@ public class GameWindow extends Application {
                         Point2D lpos = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 
                         Card droppedAt = getCurrentShape(boardCards, lpos);
-                        if (currentComponent != null) {
+                        if (pickedCard != null) {
                             if (droppedAt == null) {
                                 System.out.println("cannot find card");
                             } else {
-                                if (currentComponent.getName() == droppedAt.getName()) {
+                                if (pickedCard.getName() == droppedAt.getName()) {
 
 
                                     Question q = questionsMngr.getNextQuestion();
@@ -70,11 +73,22 @@ public class GameWindow extends Application {
 
 
                                         if (choiceDialog.getResult().equals(q.getAnswer())) {
-                                            System.out.println("got it");
+                                            System.out.println("Player id: "+currentPlayerId+" got it");
                                             droppedAt.placeChip();
                                         } else {
-                                            System.out.println("you missed it");
+                                            System.out.println("Player id: "+currentPlayerId+" missed it");
                                         }
+
+                                        // check for sequence
+                                        // this.checkSequence(droppedAt.pos)
+                                        // to loop
+                                        root.getChildren().removeAll(players.get(currentPlayerId).getCardsOnHand());
+                                        currentPlayerId++;
+                                        currentPlayerId = currentPlayerId%numOfPlayer;
+                                        root.getChildren().addAll(players.get(currentPlayerId).getCardsOnHand());
+                                        b.setText("I am player id: "+currentPlayerId);
+                                        root.getChildren().add(b);
+
 
                                     } catch (NullPointerException ne) {
                                         System.out.println("Dialog close");
@@ -85,18 +99,18 @@ public class GameWindow extends Application {
                                 System.out.println(droppedAt.getID());
                             }
 
-                            currentComponent.setOrignalPos();
+                            pickedCard.setOrignalPos();
                         }
-                        currentComponent = null;
+                        pickedCard = null;
                         inDragMode = false;
                         break;
 
                     case ("MOUSE_DRAGGED"):
                         inDragMode = true;
-                        if (currentComponent != null && lastPosition != null) {
+                        if (pickedCard != null && lastPosition != null) {
                             double delateX = clickPoint.getX() - lastPosition.getX();
                             double delateY = clickPoint.getY() - lastPosition.getY();
-                            currentComponent.move(delateX, delateY);
+                            pickedCard.move(delateX, delateY);
                         }
 
                         break;
@@ -107,11 +121,8 @@ public class GameWindow extends Application {
             }
 
         };
-    }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -131,17 +142,29 @@ public class GameWindow extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        CardsMngr cards = new CardsMngr();
 
-        boardCards = cards.getBoardCards();
-
-        //First Player
-        Player player = new Player();
-        player.setCardsOnHand(cards.getRandSet());
-        this.currentPlayerCard = player.getCardsOnHand();
+//
+//        boardCards = cardsMngr.getBoardCards();
+//
+//        //First Player
+//        Player player = new Player();
+//        player.setCardsOnHand(cardsMngr.getRandSet());
+//        this.currentPlayerCard = player.getCardsOnHand();
 
         root.getChildren().addAll(boardCards);
-        root.getChildren().addAll(currentPlayerCard);
+        root.getChildren().addAll(players.get(currentPlayerId).getCardsOnHand());
+        b = new Button("I am player id: "+currentPlayerId);
+
+        b.setLayoutY(700);
+        b.setPrefWidth(scallingFactorX*6);
+        b.setPrefHeight(scallingFactorY);
+        b.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                root.getChildren().remove(b);
+            }
+        });
+        root.getChildren().add(b);
 
     }
 
@@ -166,5 +189,19 @@ public class GameWindow extends Application {
 
         return null;
     }
+
+    public void setNumOfPlayer(int numOfPlayer) {
+        this.numOfPlayer = numOfPlayer;
+        for ( int i = 0 ; i < numOfPlayer; i++){
+            Player p = new Player();
+            p.setCardsOnHand(cardsMngr.getRandSet());
+            players.add(p);
+
+        }
+//        currentHand = players.get(currentPlayerId).getCardsOnHand();
+    }
+//    public void checkSequence(Point2D point){
+//        algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continute
+//    }
 }
 

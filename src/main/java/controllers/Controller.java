@@ -25,10 +25,11 @@ public class Controller {
 
     private Stage stage;
 
-    public Controller(){ }
+    public Controller() {
+    }
 
 
-    public void setStage (Stage stage) {
+    public void setStage(Stage stage) {
         this.stage = stage;
     }
 
@@ -44,20 +45,11 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void startGame(ActionEvent event) {
-        gameWindow = new GameWindow();
-        try {
-            gameWindow.start(stage);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("start game pressed");
-    }
-
     /***
      * Creates a Congratulation Window when button is pressed.
      */
-    @FXML public void showCongratulationWindow() {
+    @FXML
+    public void showCongratulationWindow() {
         congratulationWindow = new CongratulationWindow();
         Label congratulation_label = new Label("You won the game!\nA big thanks for playing!\nTeam 5",
                 ((CongratulationWindow) congratulationWindow).setUpImage());
@@ -69,31 +61,41 @@ public class Controller {
         congratulationWindow.show(stage);
     }
 
-    @FXML public int setWelcomeMessage(){
+    @FXML
+    public void startGame() {
         /***
          *  Dialog box that prompts player to select number of players, returns their selection.
          */
         List<Integer> players = new ArrayList<>();
-        for(int i = 2; i <= 6;i++){
-            if(i % 2 == 0) players.add(i);
+        for (int i = 2; i <= 6; i++) {
+            if (i % 2 == 0) players.add(i);
         }
-        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(2,players);
+        ChoiceDialog<Integer> dialog = new ChoiceDialog<>(2, players);
         dialog.setTitle("Player Count");
         dialog.setHeaderText("Set the number of people playing");
         dialog.setContentText("Number of players:");
         Optional<Integer> numOfPlayers = dialog.showAndWait();
-        if(numOfPlayers.isPresent()){
+        if (numOfPlayers.isPresent()) {
             System.out.println("Number of players selected is: " + "  " + numOfPlayers.get());
-            return numOfPlayers.get();
-        }
-        else{
-            System.out.println("User did not select anything, default player count of 2 will be used.");
-            return 2;
+//            return numOfPlayers.get();
+            gameWindow = new GameWindow();
+            gameWindow.setNumOfPlayer(numOfPlayers.get());
+            try {
+                gameWindow.start(stage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("User decide to not play :(");
+
+
         }
 
 
     }
-    @FXML public void closeCongratulationWindow() {
+
+    @FXML
+    public void closeCongratulationWindow() {
         congratulationWindow.hide();
     }
 
