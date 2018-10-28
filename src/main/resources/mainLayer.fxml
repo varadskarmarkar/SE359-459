@@ -17,7 +17,6 @@
                 <Button mnemonicParsing="false" onAction="#showCongratulationWindow" text="CongratWindow" />
                 <Button mnemonicParsing="false" onAction="#correctAnswerAlert" text="Correct" />
                 <Button mnemonicParsing="false" onAction="#incorrectAnswerAlert" text="Incorrect" />
-            <Button fx:id="welcomeMessage" mnemonicParsing="false" onMouseClicked="#setWelcomeMessage" text="Welcome Message" />
                 <Button mnemonicParsing="false" onAction="#startGame" text="Start Game" />
             </children>
         </VBox>
