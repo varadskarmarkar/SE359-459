@@ -8,8 +8,8 @@ public class CardsMngr {
     List<Card> cards;
     List<Card> boardCards;
     Board board;
-    final private int scallingFactorY = 65;
-    final private int scallingFactorX = 50;
+    final private int scalingFactorY = 65;
+    final private int scalingFactorX = 50;
 
     public CardsMngr() {
 
@@ -21,14 +21,18 @@ public class CardsMngr {
     }
 
     public List<Card> getRandSet() {
-        cards = new ArrayList<Card>();
+        ArrayList<Card> playerHand = new ArrayList<Card>(); //create list for 6 cards to be dealt
+        cards = this.getBoardCards(); //get list of cards already created
         Random r = new Random();
-        int x = r.nextInt(50);
+        int cardsSize = cards.size();
+        int x = r.nextInt(cardsSize);//set random pool size to number of cards
         for (int i = 0; i < 6; i++) {
-            Card card = new Card(x, new Point2D(this.scallingFactorX * i, 700), this.scallingFactorX,
-                    this.scallingFactorY, board.getName(x));
-            cards.add(card);
-            x=r.nextInt(50);
+            Card tempCard = cards.get(x);//get card by randomly generated index
+            tempCard.setPosition(this.scalingFactorX *i, 700); //set position
+            playerHand.add(tempCard); //add to player's hand
+            cards.remove(tempCard); //remove from list of remaining cards
+            cardsSize--; //decrement size and then regenerate random number
+            x=r.nextInt(cardsSize);
         }
         return cards;
     }
@@ -37,9 +41,9 @@ public class CardsMngr {
         for (int x = 0; x < 10; x++) {
             for (int y = 0; y < 10; y++) {
                 Card card = new Card((x * 10) + y,
-                        new Point2D(x * scallingFactorX, y * scallingFactorY),
-                        this.scallingFactorX,
-                        this.scallingFactorY, board.getName((x * 10) + y));
+                        new Point2D(x * scalingFactorX, y * scalingFactorY),
+                        this.scalingFactorX,
+                        this.scalingFactorY, board.getName((x * 10) + y));
                 boardCards.add(card);
             }
         }
