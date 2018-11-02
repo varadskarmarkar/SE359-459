@@ -20,4 +20,6 @@ public class Player {
     public void setCardsOnHand(List<Card> cards) {
         this.components = cards;
     }
+
+//    public void addCardToHand(Card card){ this.components.add(card); }
 }
