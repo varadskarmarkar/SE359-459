@@ -75,6 +75,12 @@ public class GameWindow extends Application {
                                         if (choiceDialog.getResult().equals(q.getAnswer())) {
                                             System.out.println("Player id: "+currentPlayerId+" got it");
                                             droppedAt.placeChip();
+
+                                            // here when player get it right
+                                            // remove it from hand
+                                            // and get the player new card
+                                            //getRandCard(position of picked card)
+
                                         } else {
                                             System.out.println("Player id: "+currentPlayerId+" missed it");
                                         }

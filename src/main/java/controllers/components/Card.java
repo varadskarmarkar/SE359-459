@@ -40,7 +40,7 @@ public class Card extends StackPane {
         getChildren().addAll(rec, text);
     }
 
-    public Card(final int id, Point2D pos, double w, double h, Enum name) {
+        public Card(final int id, Point2D pos, double w, double h, Enum name) {
         this.id = id;
         this.name = name;
         this.width = w;
@@ -59,9 +59,12 @@ public class Card extends StackPane {
 
     }
 
-
     public void setPosition(int newX, int newY){
-        this.position = new Point2D(newX, newY);
+        this.position = new Point2D(newX,newY);
+        setLayoutX(newX);
+        setLayoutY(newY);
+        rec.setX(newX);
+        rec.setY(newY);
     }
 
     public void move(double x, double y) {
