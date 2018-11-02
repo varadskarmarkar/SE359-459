@@ -49,9 +49,10 @@ public class CardsMngr {
 
         // pick random int
         Random r = new Random();
-        int x = r.nextInt(cardsForPlayers.size());
+        int x;
         // keep picking random card until we got 6 cards
         for (int i = 0; i < 6; i++) {
+            x = r.nextInt(cardsForPlayers.size());
             // random card removed from the cards for player hands (like list of shuffled cards)
             Card randomCard = cardsForPlayers.remove(x);
             // update its position so it appear at the bottom (where user see it as cards on hand)
