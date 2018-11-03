@@ -3,6 +3,7 @@ package controllers.components;
 import javafx.geometry.Point2D;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
@@ -99,8 +100,8 @@ public class Card extends StackPane {
         rec.setX(position.getX());
         rec.setY(position.getY());
     }
-    public void placeChip() {
-        rec.setFill(Color.RED);
+    public void placeChip(Paint c) {
+        rec.setFill(c);
     }
 
 }

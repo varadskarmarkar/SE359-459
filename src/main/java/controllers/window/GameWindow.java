@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -18,7 +19,6 @@ public class GameWindow extends Application {
 
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
-    final private int boardSize = 10;
     Pane root;
     Scene scene;
     int numOfPlayer;
@@ -30,9 +30,9 @@ public class GameWindow extends Application {
     List<Player> players = new ArrayList<Player>();
     QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
     CardsMngr cardsMngr = new CardsMngr();
-
     List<Card> boardCards = cardsMngr.getBoardCards();
     Button b;
+
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
@@ -74,7 +74,7 @@ public class GameWindow extends Application {
 
                                         if (choiceDialog.getResult().equals(q.getAnswer())) {
                                             System.out.println("Player id: "+currentPlayerId+" got it");
-                                            droppedAt.placeChip();
+                                            droppedAt.placeChip(players.get(currentPlayerId).getColor());
 
                                             // here when player get it right
                                             // remove it from hand
@@ -200,6 +200,7 @@ public class GameWindow extends Application {
         this.numOfPlayer = numOfPlayer;
         for ( int i = 0 ; i < numOfPlayer; i++){
             Player p = new Player();
+            p.setColor(((i%2==0)? Color.GREEN : Color.BLUE));
             p.setCardsOnHand(cardsMngr.getRandSet());
             players.add(p);
 
