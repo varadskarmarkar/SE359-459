@@ -67,6 +67,7 @@ public class Controller {
          *  Dialog box that prompts player to select number of players, returns their selection.
          */
         List<Integer> players = new ArrayList<>();
+
         for (int i = 2; i <= 6; i++) {
             if (i % 2 == 0) players.add(i);
         }
@@ -80,6 +81,22 @@ public class Controller {
 //            return numOfPlayers.get();
             gameWindow = new GameWindow();
             gameWindow.setNumOfPlayer(numOfPlayers.get());
+        }
+
+        /***
+         *  Dialog box that prompts player to select game mode.
+         */
+        List<String> modes = new ArrayList<>();
+        modes.add("Standard");
+        modes.add("Monty Python");
+
+        ChoiceDialog<String> modeDialog = new ChoiceDialog<>("Standard", modes);
+        modeDialog.setTitle("Mode");
+        modeDialog.setHeaderText("Select a mode");
+        Optional<String> mode = modeDialog.showAndWait();
+        if (mode.isPresent()) {
+            System.out.println("Mode selected is: " + mode.get());
+            gameWindow.setMode(mode.get());
             try {
                 gameWindow.start(stage);
             } catch (Exception e) {

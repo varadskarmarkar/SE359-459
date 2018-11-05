@@ -14,6 +14,7 @@ public class QuestionsMngr {
     QuestionPool questionPool;
     List<Integer> seenQustion;
     int currentQ;
+    String fileName;
 
 
 //    public QuestionsMngr(){
@@ -30,7 +31,13 @@ public class QuestionsMngr {
 //
 //    }
 
-    public QuestionsMngr(String fileName){
+    public QuestionsMngr(String mode){
+        if (mode.equals("Monty Python")) {
+            fileName = "montyPythonQuestions.txt";
+        } else {
+            fileName = "questions1.txt";
+        }
+
         currentQ = 1;
         this.questionPool = new QuestionPool();
 

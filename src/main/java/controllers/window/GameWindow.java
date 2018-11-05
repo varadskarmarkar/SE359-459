@@ -19,6 +19,7 @@ public class GameWindow extends Application {
     final private int scallingFactorY = 65;
     final private int scallingFactorX = 50;
     final private int boardSize = 10;
+    private String mode = "";
     Pane root;
     Scene scene;
     int numOfPlayer;
@@ -28,7 +29,7 @@ public class GameWindow extends Application {
     Card pickedCard; // the one being picked from player's hand, and dragged
 //    List<Card> currentHand;
     List<Player> players = new ArrayList<Player>();
-    QuestionsMngr questionsMngr = new QuestionsMngr("questions1.txt");
+    QuestionsMngr questionsMngr;
     CardsMngr cardsMngr = new CardsMngr();
 
     List<Card> boardCards = cardsMngr.getBoardCards();
@@ -67,6 +68,7 @@ public class GameWindow extends Application {
                                     ChoiceDialog choiceDialog;
                                     try {
                                         choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
+                                        choiceDialog.setTitle("Question"); // added this so that the title of the window isn't "Confirmation"
                                         choiceDialog.setHeaderText(q.getQuestion());
 
                                         choiceDialog.showAndWait();
@@ -194,6 +196,12 @@ public class GameWindow extends Application {
             }
 
         return null;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+        System.out.println("Mode is " + mode);
+        questionsMngr = new QuestionsMngr(mode);
     }
 
     public void setNumOfPlayer(int numOfPlayer) {

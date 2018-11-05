@@ -1,16 +1,137 @@
+q: Which of the following best describes the "Cone of Uncertainty?"
+a: The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.
+opt: A software delivery model that emphasizes iterative and incremental development.
+opt: We never know exactly what we're building until later on in a project.
+opt: Another name for the Waterfall model.
+opt: The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.
 
-q: question one?
-a: true
-opt: true
-opt: false
+q: The Waterfall model is dead.
+a: False
+opt: True
+opt: False
 
-q: question two?
-a: false
-opt: true
-opt: false
+q: Agile approaches like Scrum, XP, and Kanban are methodologies and should be followed exactly as designed if you want to realize any of their benefits.
+a: False
+opt: True
+opt: False
 
-q: question three?
-a: yes
-opt: yes
-opt: no
-opt: maybe
+q: Which of the following IS NOT an agile principle?
+a: The most efficient and effective method of conveying information to and within a development team is through electronic means such as email and shared wiki pages.
+opt: All of these are agile principles.
+opt: The most efficient and effective method of conveying information to and within a development team is through electronic means such as email and shared wiki pages.
+opt: Business people and developers must work together daily throughout the project.
+opt: The highest priority is to satisfy customers through early and continuous delivery of valuable software.
+opt: Welcome changing requirements, even late in development.
+
+q: Each sprint should result in a potentially shippable product.
+a: True
+opt: True
+opt: False
+
+q: The product backlog is the prioritized list of requirements for the sprint.
+a: False
+opt: True
+opt: False
+
+q: The product owner can change the sprint backlog at any time, even in the middle of the sprint.
+a: False
+opt: True
+opt: False
+
+q: Story points are just the scrum word for "hours."
+a: False
+opt: True
+opt: False
+
+q: The number of story points delivered during a sprint is called "velocity."
+a: True
+opt: True
+opt: False
+
+q: A burndown chart can be used to show team progress for a sprint, for a release, and for the product delivery as a whole.
+a: True
+opt: True
+opt: False
+
+q: If a story isn't valuable to the user, then it isn't a good story.
+a: False
+opt: True
+opt: False
+
+q: Large stories typically deliver more value than small stories. So we want the largest stories possible for our team.
+a: False
+opt: True
+opt: False
+
+q: A good "definition of done" should emphasize abstract activities.
+a: False
+opt: True
+opt: False
+
+q: A spike is a kind of story that is used by development teams to eliminate technical uncertainty.
+a: True
+opt: True
+opt: False
+
+q: Most major programming languages offer some approach for automating the building and packaging of software written in it.
+a: True
+opt: True
+opt: False
+
+q: The combination of group id, artifact id, and version is called an artifact's what?
+a: Coordinates
+opt: Tuple
+opt: Dependency
+opt: Coordinates
+opt: Resolvable name
+
+q: Which Maven POM element describes the kind of artifact that the POM file will build?
+a: packaging
+opt: dependency
+opt: artifact-id
+opt: dependency-management
+opt: packaging
+
+q: Maven's local artifact repository acts as a local cache for your build artifacts.
+a: True
+opt: True
+opt: False
+
+q: Which of the following is the default scope for a declared Maven dependency?
+a: Compile
+opt: Runtime
+opt: Test
+opt: Compile
+opt: Provided
+
+q: For continuous integration to be successful you must have which of the following?
+a: Source code control
+opt: A mandate from senior management
+opt: Manual build scripts
+opt: Acceptance by your QA team
+opt: Source code control
+
+q: Unit testing is a major communication practice under XP.
+a: True
+opt: True
+opt: False
+
+q: Velocity is a form of feedback.
+a: True
+opt: True
+opt: False
+
+q: According to XP, if you can't test a feature in an automated way, then that feature might as well not exist.
+a: True
+opt: True
+opt: False
+
+q: XP considers coding to be a form of communication.
+a: True
+opt: True
+opt: False
+
+q: Under XP it is always better to build a simple thing and make it incrementally more complex than it is to begin with a more complex thing.
+a: False
+opt: True
+opt: False
