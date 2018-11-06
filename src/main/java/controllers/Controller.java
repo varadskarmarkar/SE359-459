@@ -66,9 +66,9 @@ public class Controller {
         /***
          *  Dialog box that prompts player to select number of players, returns their selection.
          */
-        List<Integer> players = new ArrayList<>();
 
-        for (int i = 2; i <= 6; i++) {
+        List<Integer> players = new ArrayList<Integer>();
+        for (int i = 2; i <= 12; i++) {
             if (i % 2 == 0) players.add(i);
         }
         ChoiceDialog<Integer> dialog = new ChoiceDialog<>(2, players);
