@@ -1,0 +1,68 @@
+q: When encountering the Knights Who Say NI!, what does cutting down a tree with a herring represent?
+a: An expansion of scope
+opt: A user story
+opt: An expansion of scope
+opt: The waterfall method of software development
+opt: Continuous integration
+
+q: Which of the following could be considered an epic?
+a: Finding the Holy Grail
+opt: Bringing a shrubbery to the Knights Who Say NI!
+opt: Finding the Holy Grail
+opt: The Holy Hand Grenade of Antioch
+opt: Running away from the killer rabbit
+
+q: Which of the following could be considered a sprint?
+a: Walk through the forest
+opt: Walk through the forest
+opt: Find the Holy Grail
+opt: The Holy Hand Grenade of Antioch
+opt: Running away from the killer rabbit
+
+q: Which of the following could be considered a story?
+a: Bring a shrubbery to the Knights Who Say NI!
+opt: Find the Holy Grail
+opt: The Holy Hand Grenade of Antioch
+opt: Run away from the killer rabbit
+opt: Bring a shrubbery to the Knights Who Say NI!
+
+q: Which of the following could be considered a task?
+a: All of the above
+opt: Find the shrubbery
+opt: Carry the shrubbery back to the Knights who say NI!
+opt: Place the shrubbery beside another shrubbery, only slightly higher
+opt: All of the above
+
+q: What are the acceptance requirements for the shrubbery?
+a: One that looks nice and is not too expensive
+opt: One that looks nice and has flowers
+opt: One that looks nice and is very expensive
+opt: One that looks nice and is not too expensive
+opt: One that weighs the same as a duck
+
+q: What is an example of a spike that might have been helpful to determine the number of storypoints allocated to finding a shrubbery?
+a: Researching if there are any shrubbery vendors in the forest
+opt: Researching if there are any shrubbery vendors in the forest
+opt: Determining how many times a swallow needs to beat its wings in order to maintain air-speed velocity
+opt: Looking up the capital of Assyria
+opt: Consulting the Book of Armaments
+
+q: The Knights of NI! violated the principles of Agile by changing a story after the sprint had begun
+a: False
+opt: True
+opt: False
+
+q: Which of the following was missing from the shrubbery story?
+a: All of the above
+opt: A written description of the story
+opt: Storypoints
+opt: Detailed requirements organized by must haves, might haves, and nice-to-haves.
+opt: All of the above
+
+q: Which of the following would be an acceptable next step to hearing about the changed requirements including cutting down a tree with a herring?
+a: Discuss as a team to see if more resources, more time, or a reduced scope could be considered to help meet the sprint goals
+opt: Discuss as a team to see if more resources, more time, or a reduced scope could be considered to help meet the sprint goals
+opt: Increase the story's storypoints in the middle of the sprint because it just got harder
+opt: Fire the Knights who say NI! since they are obviously not good at Agile
+opt: Don't worry about the quality of the solution and just find a herring, even if it can't cut down a tree
+
