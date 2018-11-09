@@ -28,7 +28,7 @@ public class GameWindow extends Application {
     Point2D lastPosition; // for dragging and calculating the delta
     boolean inDragMode = false;
     Card pickedCard; // the one being picked from player's hand, and dragged
-//    List<Card> currentHand;
+    //    List<Card> currentHand;
     List<Player> players = new ArrayList<Player>();
     QuestionsMngr questionsMngr;
     CardsMngr cardsMngr = new CardsMngr();
@@ -36,100 +36,123 @@ public class GameWindow extends Application {
     Button b;
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                Point2D clickPoint = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 
-                String eventName = mouseEvent.getEventType().getName();
-                if (!inDragMode)
-                    if (pickedCard == null) {
-                        try {
-                            pickedCard = getCurrentShape(players.get(currentPlayerId).getCardsOnHand(), clickPoint);
-                        } catch (NullPointerException ex) {
-                            System.out.println("trying to pick no card!");
-                        }
+        boolean isSpotTaken = false;
+        int playerIdTracker;
 
+
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+            Point2D clickPoint = new Point2D(mouseEvent.getX(), mouseEvent.getY());
+
+            String eventName = mouseEvent.getEventType().getName();
+            if (!inDragMode)
+                if (pickedCard == null) {
+                    try {
+                        pickedCard = getCurrentShape(players.get(currentPlayerId).getCardsOnHand(), clickPoint);
+                    } catch (NullPointerException ex) {
+                        System.out.println("trying to pick no card!");
                     }
-                switch (eventName) {
-
-                    case ("MOUSE_RELEASED"):
-
-                        Point2D lpos = new Point2D(mouseEvent.getX(), mouseEvent.getY());
-
-                        Card droppedAt = getCurrentShape(boardCards, lpos);
-                        if (pickedCard != null) {
-                            if (droppedAt == null) {
-                                System.out.println("cannot find card");
-                            } else {
-                                if (pickedCard.getName() == droppedAt.getName()) {
-
-
-                                    Question q = questionsMngr.getNextQuestion();
-
-                                    ChoiceDialog choiceDialog;
-                                    try {
-                                        choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
-                                        choiceDialog.setTitle("Question"); // added this so that the title of the window isn't "Confirmation"
-                                        choiceDialog.setHeaderText(q.getQuestion());
-
-                                        choiceDialog.showAndWait();
-
-
-                                        if (choiceDialog.getResult().equals(q.getAnswer())) {
-                                            System.out.println("Player id: "+currentPlayerId+" got it");
-                                            droppedAt.placeChip(players.get(currentPlayerId).getColor());
-
-                                            // here when player get it right
-                                            // remove it from hand
-                                            // and get the player new card
-                                            //getRandCard(position of picked card)
-
-                                        } else {
-                                            System.out.println("Player id: "+currentPlayerId+" missed it");
-                                        }
-
-                                        // check for sequence
-                                        // this.checkSequence(droppedAt.pos)
-                                        // to loop
-                                        root.getChildren().removeAll(players.get(currentPlayerId).getCardsOnHand());
-                                        currentPlayerId++;
-                                        currentPlayerId = currentPlayerId%numOfPlayer;
-                                        root.getChildren().addAll(players.get(currentPlayerId).getCardsOnHand());
-                                        b.setText("I am player id: "+currentPlayerId);
-                                        root.getChildren().add(b);
-
-
-                                    } catch (NullPointerException ne) {
-                                        System.out.println("Dialog close");
-                                    }
-
-                                }
-
-                                System.out.println(droppedAt.getID());
-                            }
-
-                            pickedCard.setOrignalPos();
-                        }
-                        pickedCard = null;
-                        inDragMode = false;
-                        break;
-
-                    case ("MOUSE_DRAGGED"):
-                        inDragMode = true;
-                        if (pickedCard != null && lastPosition != null) {
-                            double delateX = clickPoint.getX() - lastPosition.getX();
-                            double delateY = clickPoint.getY() - lastPosition.getY();
-                            pickedCard.move(delateX, delateY);
-                        }
-
-                        break;
 
                 }
-                lastPosition = clickPoint;
+            switch (eventName) {
+
+                case ("MOUSE_RELEASED"):
+
+                    Point2D lpos = new Point2D(mouseEvent.getX(), mouseEvent.getY());
+
+                    Card droppedAt = getCurrentShape(boardCards, lpos);
+
+                    if (pickedCard != null) {
+                        if (droppedAt == null) {
+                            System.out.println("cannot find card");
+                        }
+                        else {
+
+                            if (pickedCard.getName() == droppedAt.getName()) {
+
+                                // Mark card spot is taken and track player Id.
+                                playerIdTracker = currentPlayerId;
+                                isSpotTaken = true;
+
+
+
+                                System.out.println("Spot taken: " + isSpotTaken + " by player id: " + playerIdTracker);
+
+                                Question q = questionsMngr.getNextQuestion();
+
+                                ChoiceDialog choiceDialog;
+                                try {
+                                    choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
+                                    choiceDialog.setTitle("Question"); // added this so that the title of the window isn't "Confirmation"
+                                    choiceDialog.setHeaderText(q.getQuestion());
+
+                                    choiceDialog.showAndWait();
+
+                                    if (choiceDialog.getResult().equals(q.getAnswer())) {
+                                        System.out.println("Player id: "+currentPlayerId+" got it");
+                                        droppedAt.placeChip(players.get(currentPlayerId).getColor());
+
+                                        // here when player get it right
+                                        // remove it from hand
+                                        // and get the player new card
+                                        //getRandCard(position of picked card)
+                                    }
+
+                                    else {
+                                        System.out.println("Player id: "+currentPlayerId+" missed it");
+                                        isSpotTaken = false;
+                                    }
+                                    // check for sequence
+                                    // this.checkSequence(droppedAt.pos)
+                                    // to loop
+                                    root.getChildren().removeAll(players.get(currentPlayerId).getCardsOnHand());
+                                    currentPlayerId++;
+
+                                    isSpotTaken = false;
+                                    playerIdTracker = 0;
+
+                                    currentPlayerId = currentPlayerId%numOfPlayer;
+                                    root.getChildren().addAll(players.get(currentPlayerId).getCardsOnHand());
+                                    b.setText("I am player id: "+currentPlayerId);
+                                    root.getChildren().add(b);
+
+
+                                } catch (NullPointerException ne) {
+                                    System.out.println("Dialog close");
+                                }
+                            } if ( (isSpotTaken) && currentPlayerId == playerIdTracker) {
+                                System.out.println("Cannot take spot of player: " + playerIdTracker + " " + currentPlayerId + " pick another spot.");
+                            }
+
+                            System.out.println(droppedAt.getID());
+                        }
+
+                        pickedCard.setOrignalPos();
+                    }
+                    pickedCard = null;
+                    inDragMode = false;
+                    isSpotTaken = false;
+                    break;
+
+                case ("MOUSE_DRAGGED"):
+                    inDragMode = true;
+                    isSpotTaken = false;
+//                    System.out.println("Spot not busy" + isSpotTaken);
+                    if (pickedCard != null && lastPosition != null) {
+                        double delateX = clickPoint.getX() - lastPosition.getX();
+                        double delateY = clickPoint.getY() - lastPosition.getY();
+                        pickedCard.move(delateX, delateY);
+                    }
+
+                    break;
 
             }
+            lastPosition = clickPoint;
 
-        };
+        }
+
+    };
 
 
 
