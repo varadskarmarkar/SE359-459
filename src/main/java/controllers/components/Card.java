@@ -19,6 +19,7 @@ public class Card extends StackPane {
     private Double width;
     private Double hight;
     private Rectangle rec;
+    private Paint color;
 
     private HashMap <Integer, String> questionPool;
 
@@ -53,6 +54,7 @@ public class Card extends StackPane {
 
         this.rec = new Rectangle(this.position.getX(), this.position.getY(), this.width, this.hight);
         this.rec.setStroke(Color.BLACK);
+        this.color = Color.GRAY;
         this.rec.setFill(Color.GRAY);
 
         Text text = new Text(id + "\n" + this.name + "\n");
@@ -102,6 +104,10 @@ public class Card extends StackPane {
     }
     public void placeChip(Paint c) {
         rec.setFill(c);
+        this.color = c;
+    }
+    public Paint getColor(){
+        return this.color;
     }
 
 }
