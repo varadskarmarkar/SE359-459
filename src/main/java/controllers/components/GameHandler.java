@@ -17,6 +17,6 @@ public class GameHandler {
 
     public static boolean checkSequence(Card c){
 //        algorithm to check if lastly placed chip made sequence, if so , return true else false;
-        return false;
+        return true;
     }
 }
