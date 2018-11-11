@@ -1,3 +1,7 @@
+q: Rules: Place a card onto its corresponding spot on the board. Answer given question correctly then you will place a "chip" on the game board where you put your card. You need to place 5 chips in a row either horizontally, vertically, or diagonally to win.
+a: Got it!
+opt: Got it! 
+
 q: Which of the following best describes the "Cone of Uncertainty?"
 a: The closer to the end of the project we are, the easier it is to project exactly when we'll be able to deliver the completed software.
 opt: A software delivery model that emphasizes iterative and incremental development.
@@ -135,7 +139,3 @@ q: Under XP it is always better to build a simple thing and make it incrementall
 a: False
 opt: True
 opt: False
-
-q: Rules: Place a card onto its corresponding spot on the board. Answer given question correctly then you will place a "chip" on the game board where you put your card. You need to place 5 chips in a row either horizontally, vertically, or diagonally to win.
-a: Got it!
-opt: Got it! 
