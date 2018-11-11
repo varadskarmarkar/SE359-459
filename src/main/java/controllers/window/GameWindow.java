@@ -33,6 +33,8 @@ public class GameWindow extends Application {
     QuestionsMngr questionsMngr;
     CardsMngr cardsMngr = new CardsMngr();
     List<Card> boardCards = cardsMngr.getBoardCards();
+    List<Card> correctlyAnsweredCardsT1 = new ArrayList<>();
+    List<Card> correctlyAnsweredCardsT2 = new ArrayList<>();
     Button b;
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
@@ -78,6 +80,13 @@ public class GameWindow extends Application {
                                         if (choiceDialog.getResult().equals(q.getAnswer())) {
                                             System.out.println("Player id: "+currentPlayerId+" got it");
                                             droppedAt.placeChip(players.get(currentPlayerId).getColor());
+                                            if (players.get(currentPlayerId).getColor() == Color.GREEN){
+                                                correctlyAnsweredCardsT1.add(droppedAt);
+                                                GameWindow.printCardsInCorrectCardList(correctlyAnsweredCardsT1);
+                                            } else {
+                                                correctlyAnsweredCardsT2.add(droppedAt);
+                                                GameWindow.printCardsInCorrectCardList(correctlyAnsweredCardsT2);
+                                            }
 
                                             // here when player get it right
                                             // remove it from hand
@@ -216,8 +225,17 @@ public class GameWindow extends Application {
         }
 //        currentHand = players.get(currentPlayerId).getCardsOnHand();
     }
-//    public void checkSequence(Point2D point){
-//        algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continute
-//    }
+    //just a debugging method
+    public static void printCardsInCorrectCardList(List<Card> list){
+        System.out.println(list.size());
+        for (Card c : list){
+            System.out.println("aye");
+            System.out.print(c.getID());
+        }
+    }
+    public void checkSequence(Point2D point){
+        //algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continue
+
+    }
 }
 
