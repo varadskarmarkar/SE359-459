@@ -64,9 +64,20 @@ public class Controller {
     @FXML
     public void startGame() {
         /***
+         *  Alert that displays game rules
+         */
+        Alert alert = new Alert(
+                Alert.AlertType.INFORMATION,
+                "Place a card onto its corresponding spot on the board. If you answer the given question " +
+                        "correctly then you will place a \"chip\" on the game board where you put your card. You " +
+                        "need to place 5 chips in a row either horizontally, vertically, or diagonally to win.",
+                ButtonType.OK);
+        alert.setHeaderText("Rules");
+        alert.showAndWait();
+
+        /***
          *  Dialog box that prompts player to select number of players, returns their selection.
          */
-
         List<Integer> players = new ArrayList<Integer>();
         for (int i = 2; i <= 12; i++) {
             if (i % 2 == 0) players.add(i);
