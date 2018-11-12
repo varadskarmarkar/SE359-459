@@ -31,8 +31,8 @@ public class GameWindow extends Application {
 //    List<Card> currentHand;
     List<Player> players = new ArrayList<Player>();
     QuestionsMngr questionsMngr;
-    CardsMngr cardsMngr = new CardsMngr();
-    List<Card> boardCards = cardsMngr.getBoardCards();
+    static CardsMngr cardsMngr = new CardsMngr();
+    GameHandler gameHandler = new GameHandler();
     Button b;
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
@@ -56,7 +56,7 @@ public class GameWindow extends Application {
 
                         Point2D lpos = new Point2D(mouseEvent.getX(), mouseEvent.getY());
 
-                        Card droppedAt = getCurrentShape(boardCards, lpos);
+                        Card droppedAt = getCurrentShape(cardsMngr.getBoardCards(), lpos);
                         if (pickedCard != null) {
                             if (droppedAt == null) {
                                 System.out.println("cannot find card");
@@ -152,6 +152,7 @@ public class GameWindow extends Application {
         primaryStage.show();
 
 
+        gameHandler.setCardsMngr(cardsMngr);
 //
 //        boardCards = cardsMngr.getBoardCards();
 //
@@ -160,7 +161,7 @@ public class GameWindow extends Application {
 //        player.setCardsOnHand(cardsMngr.getRandSet());
 //        this.currentPlayerCard = player.getCardsOnHand();
 
-        root.getChildren().addAll(boardCards);
+        root.getChildren().addAll(cardsMngr.getBoardCards());
         root.getChildren().addAll(players.get(currentPlayerId).getCardsOnHand());
         b = new Button("I am player id: "+currentPlayerId);
 
@@ -216,8 +217,6 @@ public class GameWindow extends Application {
         }
 //        currentHand = players.get(currentPlayerId).getCardsOnHand();
     }
-//    public void checkSequence(Point2D point){
-//        algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continute
-//    }
+
 }
 
