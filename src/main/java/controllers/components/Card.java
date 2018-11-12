@@ -19,6 +19,7 @@ public class Card extends StackPane {
     private Double width;
     private Double hight;
     private Rectangle rec;
+    private boolean taken;
 
     private HashMap <Integer, String> questionPool;
 
@@ -26,6 +27,7 @@ public class Card extends StackPane {
     public Card() {
         this.id = 0;
         this.name = N.X;
+        this.taken = false;
 //        this.ques = "whattt";
 
         this.position = new Point2D(80,70);
@@ -44,6 +46,7 @@ public class Card extends StackPane {
         public Card(final int id, Point2D pos, double w, double h, Enum name) {
         this.id = id;
         this.name = name;
+        this.taken = false;
         this.width = w;
         this.hight = h;
 
@@ -66,6 +69,14 @@ public class Card extends StackPane {
         setLayoutY(newY);
         rec.setX(newX);
         rec.setY(newY);
+    }
+
+    public void setTaken() {
+        this.taken = true;
+    }
+
+    public boolean checkIfTaken() {
+        return this.taken;
     }
 
     public void move(double x, double y) {
