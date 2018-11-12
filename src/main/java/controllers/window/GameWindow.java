@@ -60,6 +60,8 @@ public class GameWindow extends Application {
                         if (pickedCard != null) {
                             if (droppedAt == null) {
                                 System.out.println("cannot find card");
+                            } else if (droppedAt.checkIfTaken()) {
+                                System.out.println("Space is taken; find another spot.");
                             } else {
                                 if (pickedCard.getName() == droppedAt.getName()) {
 
@@ -78,6 +80,7 @@ public class GameWindow extends Application {
                                         if (choiceDialog.getResult().equals(q.getAnswer())) {
                                             System.out.println("Player id: "+currentPlayerId+" got it");
                                             droppedAt.placeChip(players.get(currentPlayerId).getColor());
+                                            droppedAt.setTaken();
 
                                             // here when player get it right
                                             // remove it from hand
