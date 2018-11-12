@@ -114,7 +114,7 @@ public class GameWindow extends Application {
 
                                 }
 
-                                System.out.println(droppedAt.getID());
+                                //System.out.println(droppedAt.getID());
                             }
 
                             pickedCard.setOrignalPos();
@@ -233,9 +233,64 @@ public class GameWindow extends Application {
             System.out.print(c.getID());
         }
     }
-    public void checkSequence(Point2D point){
-        //algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continue
 
+    public boolean winningSequence(Card newCard, List<Card> teamCards){
+        // first put together list of cards within team's answered cards that are adjacent to c
+        List<Card> adjacentCards = new ArrayList<>();
+        for (Card c : teamCards){
+            if (adjacencycheck(c, newCard)) adjacentCards.add(c);
+        }
+
+        if (checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.NORTHWEST) + checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.SOUTHEAST) >= 5 ) return true;
+        if (checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.NORTH) + checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.SOUTH) >= 5 ) return true;
+        if (checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.SOUTHWEST) + checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.NORTHEAST) >= 5 ) return true;
+        if (checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.EAST) + checkSequenceRecursive(newCard, adjacentCards, 0,0, Direction.WEST) >= 5 ) return true;
+        return false;
+    }
+    private static int checkSequenceRecursive(Card currentCard, List<Card> cardList, int index, int sequenceLength, Direction direction){
+        Card compareCard = cardList.get(index);
+        if (adjacencyDirection(currentCard, compareCard) == direction) return checkSequenceRecursive(compareCard, cardList, index + 1, sequenceLength + 1, direction);
+        else return sequenceLength;
+    }
+    private static Direction adjacencyDirection(Card c1, Card c2){
+        int id1 = c1.getID();
+        int id2 = c2.getID();
+
+        if (id1 == (id2 + 11)) return Direction.NORTHWEST;
+        else if (id1 == (id2 + 1)) return Direction.NORTH;
+        else if (id1 == (id2 - 9)) return Direction.NORTHEAST;
+        else if (id1 == (id2 - 10)) return Direction.EAST;
+        else if (id1 == (id2 - 11)) return Direction.SOUTHEAST;
+        else if (id1 == (id2 - 1)) return Direction.SOUTH;
+        else if (id1 == (id2 + 9)) return Direction.SOUTHWEST;
+        else if (id1 == (id2 + 10)) return Direction.WEST;
+        return null;
+    }
+
+    private static boolean adjacencycheck(Card c1, Card c2){
+        int id1 = c1.getID();
+        int id2 = c2.getID();
+
+        if (id1 == (id2 + 11)) return true;
+        else if (id1 == (id2 + 1)) return true;
+        else if (id1 == (id2 - 9)) return true;
+        else if (id1 == (id2 - 10)) return true;
+        else if (id1 == (id2 - 11)) return true;
+        else if (id1 == (id2 - 1)) return true;
+        else if (id1 == (id2 + 9)) return true;
+        else if (id1 == (id2 + 10)) return true;
+        else return false;
+    }
+
+    enum  Direction{
+        NORTHWEST,
+        NORTH,
+        NORTHEAST,
+        EAST,
+        SOUTHEAST,
+        SOUTH,
+        SOUTHWEST,
+        WEST
     }
 }
 
