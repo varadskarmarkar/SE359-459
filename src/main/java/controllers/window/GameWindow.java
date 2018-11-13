@@ -13,6 +13,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GameWindow extends Application {
@@ -33,6 +34,8 @@ public class GameWindow extends Application {
     QuestionsMngr questionsMngr;
     CardsMngr cardsMngr = new CardsMngr();
     List<Card> boardCards = cardsMngr.getBoardCards();
+    List<Integer> correctlyAnsweredCardsT1 = new ArrayList<>();
+    List<Integer> correctlyAnsweredCardsT2 = new ArrayList<>();
     Button b;
 
     EventHandler<MouseEvent> mouseHandler = new EventHandler<MouseEvent>() {
@@ -81,9 +84,29 @@ public class GameWindow extends Application {
                                             System.out.println("Player id: "+currentPlayerId+" got it");
                                             droppedAt.placeChip(players.get(currentPlayerId).getColor());
                                             droppedAt.setTaken();
+                                            if (players.get(currentPlayerId).getColor() == Color.GREEN){
+                                                correctlyAnsweredCardsT1.add(droppedAt.getID());
+                                                System.out.println("Added to T1 cards: " + droppedAt.getID());
+//                                                ArrayList<Integer> testList = new ArrayList<>();
+//                                                testList.add(58);
+//                                                testList.add(68);
+//                                                testList.add(78);
+//                                                testList.add(88);
+//                                                testList.add(90);
+//                                                System.out.println("testing if testlist is a sequence: " + checkHorizontal(testList));
+                                                System.out.println("testing if it's a sequence: " + checkVertical(correctlyAnsweredCardsT1));
+                                                checkVertical(correctlyAnsweredCardsT1);
+                                                checkHorizontal(correctlyAnsweredCardsT1);
+                                            } else {
+                                                correctlyAnsweredCardsT2.add(droppedAt.getID());
+                                                System.out.println("Added to T2 cards: " + droppedAt.getID());
+                                                System.out.println("testing if it's a sequence: " + checkVertical(correctlyAnsweredCardsT2));
+                                                checkVertical(correctlyAnsweredCardsT2);
+                                                checkHorizontal(correctlyAnsweredCardsT2);
+                                            }
 
                                             // here when player get it right
-                                            // remove it from hand
+                                            // remove it from hand.
                                             // and get the player new card
                                             //getRandCard(position of picked card)
 
@@ -91,9 +114,6 @@ public class GameWindow extends Application {
                                             System.out.println("Player id: "+currentPlayerId+" missed it");
                                         }
 
-                                        // check for sequence
-                                        // this.checkSequence(droppedAt.pos)
-                                        // to loop
                                         root.getChildren().removeAll(players.get(currentPlayerId).getCardsOnHand());
                                         currentPlayerId++;
                                         currentPlayerId = currentPlayerId%numOfPlayer;
@@ -180,18 +200,6 @@ public class GameWindow extends Application {
 
     }
 
-    /**
-     * Julio
-     * <p>
-     * private void createQuestionDialog(Question q) {
-     * //        QuestionGenerator questionGenerator = new QuestionGenerator();
-     * ChoiceDialog choiceDialog = new ChoiceDialog(q.getAnswer(), q.getOptions());
-     * choiceDialog.setHeaderText(q.getQuestion());
-     * choiceDialog.show();
-     * }
-     * Abdul : move some of the code into the mouse handler
-     */
-
     public Card getCurrentShape(List<Card> components, Point2D clickLocation) {
         for (Card component : components)
             if (component.contains(clickLocation)) {
@@ -217,10 +225,51 @@ public class GameWindow extends Application {
             players.add(p);
 
         }
-//        currentHand = players.get(currentPlayerId).getCardsOnHand();
     }
-//    public void checkSequence(Point2D point){
-//        algorithm to check if lastly placed chip made sequence, if so , show winning message, otherwise continute
-//    }
+
+    // this function is for the test that Abdul wrote. I updated the code to use checkVertical and checkHorizontal directly.
+    public void checkSequence(Point2D point){
+        checkVertical(correctlyAnsweredCardsT1);
+        checkHorizontal(correctlyAnsweredCardsT1);
+        checkVertical(correctlyAnsweredCardsT2);
+        checkHorizontal(correctlyAnsweredCardsT2);
+    }
+
+    // vertical check
+    private static boolean checkVertical(List<Integer> teamCards) {
+        int columnAdditionFactor = 0;
+        int targetNumber;
+        for (int j = 0; j < 10 ; j++ ) {
+            for (int i = 0; i < 6; i++) {
+                targetNumber = i + columnAdditionFactor;
+                if (teamCards.contains(targetNumber) && teamCards.contains(targetNumber + 1) &&
+                        teamCards.contains(targetNumber + 2) && teamCards.contains(targetNumber + 3) &&
+                        teamCards.contains(targetNumber + 4)) {
+                    return true;
+                }
+            }
+            columnAdditionFactor += 10;
+
+        }
+        return false;
+    }
+
+    //horizontal check
+    private static boolean checkHorizontal(List<Integer> teamCards) {
+        int rowAdditionFactor = 0;
+        int targetNumber;
+        for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < 6; i++) {
+                targetNumber= (i * 10) + rowAdditionFactor;
+                if (teamCards.contains(targetNumber) && teamCards.contains(targetNumber + 10) &&
+                        teamCards.contains(targetNumber + 20) && teamCards.contains(targetNumber + 30) &&
+                        teamCards.contains(targetNumber + 40)) {
+                    return true;
+                }
+            }
+            rowAdditionFactor++;
+        }
+        return false;
+    }
 }
 
